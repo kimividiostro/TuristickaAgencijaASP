@@ -1,0 +1,34 @@
+﻿
+
+@using WebApplication1.Models
+
+@{
+    ViewBag.Title = "NoviAranzman";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Novi Aranzman</h3>
+
+<p class="text-warning">Sva polja moraju biti popunjena!</p> <br />
+@using (Html.BeginForm("DodajAranzman", "Aranzmani"))
+{
+    Aranzman aranzman = new Aranzman();
+
+    <div class="form-group">
+        @Html.LabelFor(m => aranzman.Destinacija, new { @class = "text-info" })
+        @Html.TextBoxFor(m => aranzman.Destinacija, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => aranzman.Datum, new { @class = "text-info" })
+        @Html.TextBoxFor(m => aranzman.Datum, new { @class = "form-control"})
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => aranzman.Cena, new { @class = "text-info" })
+        @Html.TextBoxFor(m => aranzman.Cena, new { @class = "form-control" })
+    </div>
+
+    <button class="btn bg-primary" type="submit" data-html="@aranzman">Dodaj aranžman</button>
+}
+

@@ -1,0 +1,54 @@
+﻿@model WebApplication1.ViewModels.SviAranzmaniViewModel
+
+
+@{
+    ViewBag.Title = "Svi Aranzmani";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*PRAVI TABELU SA PODACIMA SVIH ARANZMANA*@
+
+<h2>Svi aranzmani</h2>
+<br />
+
+<table class="table table-hover" id="tabelaAranzmani">
+    
+    <thead>
+
+    <tr>
+        <th>Šifra</th>
+        <th>Destinacija</th>
+        <th>Datum polaska</th>
+        <th>Cena(€)</th>
+    </tr>
+        
+    </thead>
+    
+    <tbody>  
+    @foreach (var item in Model.Aranzmani)
+    {
+    <tr>
+        <td>@Html.ActionLink(item.Id.ToString(), "Detalji", "Aranzmani", routeValues: item, htmlAttributes: null)</td>
+        <td>@item.Destinacija</td>
+        <td>@item.Datum.ToShortDateString()</td>
+        <td>@item.Cena</td>
+    </tr>
+    }
+    </tbody>
+
+    
+    
+</table>
+
+
+        
+    
+@section scripts {
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tabelaAranzmani").DataTable({ paging: false,  });
+        });
+    </script>
+    }

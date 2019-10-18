@@ -1,0 +1,36 @@
+﻿@model WebApplication1.Models.Aranzman
+@using Microsoft.AspNet.Identity;
+
+
+@{
+    ViewBag.Title = "Aranzman";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    string korisnikID = User.Identity.GetUserId();
+    var aranzman = Model;
+}
+
+
+@using (Html.BeginForm(actionName:"Rezervisi", controllerName:"Aranzmani", routeValues: aranzman)) 
+{ 
+    
+
+    <h2>Aranžman @Model.Id</h2>
+    <br />
+
+    <p>Šifra aranžmana: @Model.Id</p>
+    <br />
+
+    <p>Destinacija: @Model.Destinacija</p>
+    <br />
+
+    <p>Datum polaska: @Model.Datum.ToShortDateString()</p>
+    <br />
+
+    <p>Cena aranžmana: @Model.Cena €</p>
+    <br />
+
+    <button class="btn btn-primary" type="submit">Rezervisi</button>
+   } 

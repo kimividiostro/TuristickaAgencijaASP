@@ -1,0 +1,47 @@
+﻿
+
+@{
+    ViewBag.Title = "admctrl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (!User.IsInRole("Admin"))
+{
+    throw new HttpException();
+}
+
+@{ 
+    var aranzmani = Broker.Instanca.UcitajSveAranzmane();
+}
+
+
+
+<table class="table table-hover" id="tabelaAranzmani">
+
+    <thead>
+
+        <tr>
+            <th>Šifra</th>
+            <th>Destinacija</th>
+            <th>Datum polaska</th>
+            <th>Cena(€)</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var item in aranzmani)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.Id.ToString(), "Detalji", "Aranzmani", routeValues: item, htmlAttributes: null)</td>
+                <td>@item.Destinacija</td>
+                <td>@item.Datum.ToShortDateString()</td>
+                <td>@item.Cena</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<button class="btn btn-primary" onclick="location.href='@Url.Action("NoviAranzman","Aranzmani")'">Dodaj aranžman</button>

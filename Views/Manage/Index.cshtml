@@ -1,0 +1,58 @@
+﻿@model WebApplication1.Models.IndexViewModel
+
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Moj nalog";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+    
+@{ 
+    string userId = User.Identity.GetUserId();
+
+    var aranzmani = Broker.Instanca.RezervisaniAranzmani(userId);
+}
+
+@if(aranzmani.Count == 0 || aranzmani == null)
+{
+    <p>Niste rezervisali nijedan aranžman :(</p><br />
+    <p>Našu ponudu možete pogledati @Html.ActionLink("ovde","Index","Home").</p>
+}
+else 
+{
+    <h3 class="text-info"><b>Rezervisani aranžmani</b></h3>
+<table class="table table-hover">
+
+    <thead>
+
+        <tr>
+            <th>Šifra</th>
+            <th>Destinacija</th>
+            <th>Datum polaska</th>
+            <th>Cena(€)</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var item in aranzmani)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.Id.ToString(), "Detalji", "Aranzmani", routeValues: item, htmlAttributes: null)</td>
+                <td>@item.Destinacija</td>
+                <td>@item.Datum.ToShortDateString()</td>
+                <td>@item.Cena</td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+}
+
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+
