@@ -84,6 +84,9 @@ namespace WebApplication1.Controllers
             var user = await UserManager.FindAsync(userName, model.Password);
             if (user != null)
             {
+                if (!UserManager.IsEmailConfirmed(user.Id))
+                    return View("EmailNotConfirmed");
+
                 var code = await UserManager.GenerateTwoFactorTokenAsync(user.Id, twoFactorProvider: "Email Code");
                 var mailMessage = new System.Net.Mail.MailMessage("admin@agencija.com ",
                             user.Email,
@@ -108,22 +111,6 @@ namespace WebApplication1.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-
-
-
-            try
-            {
-                var userid = UserManager.FindByEmail(model.Email).Id;
-                if (!UserManager.IsEmailConfirmed(userid))
-                {
-                    return View("EmailNotConfirmed");
-                }
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "Neuspešno logovanje.");
-                return View(model);
-            }
 
             
 
