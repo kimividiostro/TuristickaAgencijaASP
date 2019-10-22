@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -77,8 +76,6 @@ namespace WebApplication1.Controllers
             var rezultat = await UserManager.FindByEmailAsync(model.Email);
             if(rezultat != null)
                 userName = rezultat.UserName;
-            
-            
             
 
             var user = await UserManager.FindAsync(userName, model.Password);

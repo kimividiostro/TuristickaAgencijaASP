@@ -9,26 +9,26 @@
 
 <h3>Novi Aranzman</h3>
 
-<p class="text-warning">Sva polja moraju biti popunjena!</p> <br />
+<p class="text-warning">Sva polja moraju biti popunjena!</p>
+<br />
 @using (Html.BeginForm("DodajAranzman", "Aranzmani"))
 {
     Aranzman aranzman = new Aranzman();
 
-    <div class="form-group">
+    <div class="form-group" id="tbDestinacija">
         @Html.LabelFor(m => aranzman.Destinacija, new { @class = "text-info" })
         @Html.TextBoxFor(m => aranzman.Destinacija, new { @class = "form-control" })
     </div>
 
-    <div class="form-group">
+    <div class="form-group" >
         @Html.LabelFor(m => aranzman.Datum, new { @class = "text-info" })
-        @Html.TextBoxFor(m => aranzman.Datum, new { @class = "form-control"})
+        @Html.TextBoxFor(m => aranzman.Datum, new { @class = "form-control", @Value = $"{DateTime.Now.ToShortDateString()}"})
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => aranzman.Cena, new { @class = "text-info" })
+    <div class="form-group" id="tbAranzman">
+        @Html.LabelFor(m => aranzman.Cena, new { @class = "text-info"})
         @Html.TextBoxFor(m => aranzman.Cena, new { @class = "form-control" })
     </div>
 
     <button class="btn bg-primary" type="submit" data-html="@aranzman">Dodaj aranžman</button>
 }
-
